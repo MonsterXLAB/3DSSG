@@ -1,6 +1,6 @@
-if __name__ == '__main__' and __package__ is None:
-    from os import sys
-    sys.path.append('../')
+import sys
+import os
+sys.path.append(os.getcwd())
 import os,argparse,json,time
 import numpy as np
 from shutil import copyfile
@@ -119,4 +119,5 @@ def main():
     else:
         Warning('cannot find reference file at',reference_file_name)
 
-if __name__ == "__main__": main()
+if __name__ == "__main__": 
+    main()

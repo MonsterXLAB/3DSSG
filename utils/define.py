@@ -1,5 +1,5 @@
-ROOT_PATH = '/path/to/repo/3DSSG/'
-DATA_PATH = '/path/to/3RScan/'
+ROOT_PATH = '/3DSSG/'
+DATA_PATH = '/3RScan/'
 SCANNET_DATA_PATH = '/path/to/scannet' 
 SCANNET_SPLIT_TRAIN = '/path/to/scannet/Tasks/Benchmarkscannetv2_train.txt'
 SCANNET_SPLIT_VAL = '/path/to/scannet/Tasks/Benchmark/scannetv2_val.txt'

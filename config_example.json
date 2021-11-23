@@ -50,12 +50,12 @@
     "NONE_RATIO": 1.0
   },
   "dataset": {
-    "root": ["./data/example_data"],
+    "root": ["/3RScan"],
     "selection": "",
     "ignore_scannet_rel": true,
     "is_v2": true,
     "_label_file": ["labels.instances.align.annotated.v2.ply", "inseg.ply", "cvvseg.ply"],
-    "label_file": "inseg.ply",
+    "label_file": "labels.instances.align.annotated.v2.ply",
     "data_augmentation": false,
     "num_points": 128,
     "num_points_union": 256,

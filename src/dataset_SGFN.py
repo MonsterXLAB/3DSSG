@@ -138,7 +138,7 @@ class SGFNDataset (data.Dataset):
         import resource
         rlimit = resource.getrlimit(resource.RLIMIT_NOFILE)
         resource.setrlimit(resource.RLIMIT_NOFILE, (4096, rlimit[1]))
-        
+     
         if isinstance(self.root, list):
             with open(os.path.join(self.root[0],'args.json'), 'r') as f:
                 jf = json.load(f)

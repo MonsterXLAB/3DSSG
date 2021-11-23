@@ -16,3 +16,6 @@ files/*.json
 files/*.txt
 files/
 *.zip
+.vscode/
+onnxruntime/
+SceneGraphFusion/

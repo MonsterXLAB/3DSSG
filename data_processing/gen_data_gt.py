@@ -1,6 +1,5 @@
-if __name__ == '__main__' and __package__ is None:
-    from os import sys
-    sys.path.append('../')
+from os import sys
+sys.path.append('/3DSSG')
 from utils import util_ply
 import trimesh
 import open3d as o3d
@@ -16,7 +15,7 @@ import argparse
 def Parser(add_help=True):
     parser = argparse.ArgumentParser(description='Process some integers.', formatter_class = argparse.ArgumentDefaultsHelpFormatter,
                                      add_help=add_help)
-    parser.add_argument('--scans', type=str,default='/media/sc/SSD1TB/dataset/3RScan/data/3RScan/')
+    parser.add_argument('--scans', type=str,default='/3RScan/')
     parser.add_argument('--type', type=str, default='train', choices=['train', 'test', 'validation'], help="allow multiple rel pred outputs per pair",required=False)
     parser.add_argument('--pth_out', type=str,default='../data/tmp', help='pth to output directory',required=True)
     parser.add_argument('--relation', type=str,default='relationships', choices=['relationships_extended', 'relationships'])
