@@ -23,10 +23,27 @@ def build_edge_from_selection(node_ids,neighbor_dict, max_edges_per_node):
     return edge_indices
 
 def build_neighbor(nns:dict, instance2labelName:dict, n_times:int, n_seed = 1):
-    ''' Select node'''
+    ''' Select node based on neighbor levels
+
+    Steps:
+    1. For a scan, given neighbors from nns dict, and instances.
+    2. Random pick n_seed objects in the scan.
+    3. Search n_times levels neighbors.
+    4. return the neighbors.
+
+    Args:
+        nns(dict{str: list}): {object_id: neighbors object id list}.
+        instance2labelName(dict{int: str}): {object_id: real name of the object}
+        n_times(int): neighbor levels for searching.
+        n_seed(int): Initial number of nodes for searching.
+    
+    Returns:
+        filterred_nodes(list): neighbors nodes in the range of n_times levels.
+    '''
     selected_nodes = list(instance2labelName.keys())
     index = np.random.choice(np.unique(selected_nodes),n_seed).tolist()
-    index = list(set(index)) # make them unique
+    index = list(set(index)) # TODO dict keys can't be the same, so the indexs are unique already.
+    # Check all the random selected objects are in the graph.
     for n_idx in selected_nodes:
         if str(n_idx) not in nns:
             print('cannot find key',n_idx,'in',nns.keys())

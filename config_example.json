@@ -1,7 +1,7 @@
 {
   "_MODEL": ["SGFN", "SGPN"],
   "MODEL": "SGFN",
-  "VERBOSE": false,
+  "VERBOSE": true,
   "SEED": 2020,
   "MAX_EPOCHES": 1,
   "LR": 0.001,

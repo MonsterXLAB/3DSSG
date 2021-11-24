@@ -11,6 +11,14 @@ except:
 
 
 def read_labels(plydata):
+    """Read ply mesh data and return the segmentation labels.
+
+    Args:
+        plydata(trimesh): trimesh data including segmenation. n x 3.
+    
+    Returns:
+        labels: segmentation label of each point. n x 1.
+    """
     data = plydata.metadata['ply_raw']['vertex']['data']
     try:
         labels = data['objectId']

@@ -510,6 +510,17 @@ class SGFNDataset (data.Dataset):
         return points
 
     def read_relationship_json(self, data, selected_scans:list):
+        '''Read relation json file and return relationship, objects, scans, nns.
+
+        Args:
+            data(dict): data includes keys neighbors, scans
+        
+        Returns:
+            rel(dict(list)): {scaneid: [id_src, id_tar, relationship index, relationship]}
+            objs(dict(dict)): {scanid: {id: object_name}}
+            scans(list): [scans's filename list]
+            nns(dict): {scanid: {obj_id: related obj_id list}}
+        '''
         rel = dict()
         objs = dict()
         scans = list()
