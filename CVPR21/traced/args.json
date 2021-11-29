@@ -1,0 +1,120 @@
+{
+  "USE_GCN": true,
+  "USE_RGB": false,
+  "USE_NORMAL": false,
+  "dim_point": 3,
+  "dim_edge": 11,
+  "DIM_ATTEN": 256,
+  "obj_pred_from_gcn": true,
+  "dim_o_f": 512,
+  "dim_r_f": 256,
+  "dim_hidden_feature": 512,
+  "num_classes": 160,
+  "num_relationships": 8,
+  "multi_rel_outputs": false,
+  "flow": "target_to_source",
+  "enc_o": {
+    "model_obj_pnetenc": {
+      "path": "obj_pnetenc",
+      "input": [
+        "x"
+      ],
+      "output": [
+        "y"
+      ]
+    }
+  },
+  "enc_r": {
+    "model_rel_pnetenc": {
+      "path": "rel_pnetenc",
+      "input": [
+        "x"
+      ],
+      "output": [
+        "y"
+      ]
+    }
+  },
+  "n_layers": 2,
+  "gcn_0": {
+    "gcn_0_edgeatten": {
+      "atten": {
+        "model_gcn_0_edgeatten_MultiHeadedEdgeAttention": {
+          "path": "gcn_0_edgeatten_MultiHeadedEdgeAttention",
+          "input": [
+            "query",
+            "edge",
+            "value"
+          ],
+          "output": [
+            "w_query",
+            "prob"
+          ]
+        }
+      },
+      "prop": {
+        "model_gcn_0_edgeatten_prop": {
+          "path": "gcn_0_edgeatten_prop",
+          "input": [
+            "x_in"
+          ],
+          "output": [
+            "x_out"
+          ]
+        }
+      }
+    }
+  },
+  "gcn_1": {
+    "gcn_1_edgeatten": {
+      "atten": {
+        "model_gcn_1_edgeatten_MultiHeadedEdgeAttention": {
+          "path": "gcn_1_edgeatten_MultiHeadedEdgeAttention",
+          "input": [
+            "query",
+            "edge",
+            "value"
+          ],
+          "output": [
+            "w_query",
+            "prob"
+          ]
+        }
+      },
+      "prop": {
+        "model_gcn_1_edgeatten_prop": {
+          "path": "gcn_1_edgeatten_prop",
+          "input": [
+            "x_in"
+          ],
+          "output": [
+            "x_out"
+          ]
+        }
+      }
+    }
+  },
+  "cls_o": {
+    "model_obj_pnetcls": {
+      "path": "obj_pnetcls",
+      "input": [
+        "x"
+      ],
+      "output": [
+        "y"
+      ]
+    }
+  },
+  "cls_r": {
+    "model_rel_pnetcls": {
+      "path": "rel_pnetcls",
+      "input": [
+        "x"
+      ],
+      "output": [
+        "y"
+      ]
+    }
+  },
+  "label_type": "3RScan160"
+}

@@ -112,8 +112,12 @@ def load_rgb(path, target_name=define.LABEL_FILE_NAME):
         for i in range(len(query_points)):
             if isinstance(mesh, trimesh.base.Trimesh):
                 point = query_points[i]
-                [k, idx, distance] = tree.search_radius_vector_3d(point, 0.001)
+                [k, idx, distance] = tree.search_radius_vector_3d(point, 0.01)
             else:
+                idx = [i]
+            try:
+                idx[0]
+            except Exception as e:
                 idx = [i]
             label_mesh_align.visual.vertex_colors[i] = colors[idx[0]]
             label_mesh_align.metadata['ply_raw']['vertex']['data']['red'][

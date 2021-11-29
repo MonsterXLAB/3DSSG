@@ -13,34 +13,34 @@ class BaseModel(nn.Module):
         self.eva_iou = 0
         self.best_suffix = '_best.pth'
         self.suffix = '.pth'
-        self.skip_names = ['loss']        
+        self.skip_names = ['loss']
         self.saving_pth = os.path.join(config.PATH,name)
         Path(self.saving_pth).mkdir(parents=True, exist_ok=True)
         self.config_path = os.path.join(self.saving_pth, 'config')
-        
+
     def saveConfig(self, path):
         torch.save({
             'iteration': self.iteration,
             'eva_iou' : self.eva_iou
         }, path)
-        
+
     def loadConfig(self, path):
         if os.path.exists(path):
             if torch.cuda.is_available():
                 data = torch.load(path)
             else:
                 data = torch.load(path, map_location=lambda storage, loc: storage)
-                
+
             try:
                 eva_iou = data['eva_iou']
             except:
                 print('Target saving config file does not contain eva_iou!')
                 eva_iou = 0
-                
+
             return data['iteration'], eva_iou
         else:
             return 0, 0
-        
+
     def save(self):
         print('\nSaving %s...' % self.name)
 
@@ -57,7 +57,7 @@ class BaseModel(nn.Module):
             else:
                 print('Previous IoU is better, save this one as checkpoint.\n')
                 suffix = self.suffix
-                
+
         self.saveConfig(self.config_path + suffix)
         for name,model in self._modules.items():
             skip = False
@@ -67,11 +67,11 @@ class BaseModel(nn.Module):
             if skip is False:
                 self.saveWeights(model, os.path.join(self.saving_pth,name + suffix))
         torch.save({'optimizer': self.optimizer.state_dict()}, os.path.join(self.saving_pth,'optimizer'+suffix))
-                
+
     def load(self, best=False):
         print('\nLoading %s model...' % self.name)
         loaded=True
-        
+
         if os.path.exists(self.config_path+self.best_suffix) and best:
             print('\tTrying to load the best model')
             suffix = self.best_suffix
@@ -104,17 +104,17 @@ class BaseModel(nn.Module):
                     skip = True
             if skip is False:
                 loaded &= self.loadWeights(model, os.path.join(self.saving_pth,name + suffix))
-        
+
         if os.path.exists(os.path.join(self.saving_pth,'optimizer'+suffix)):
             data = torch.load(os.path.join(self.saving_pth,'optimizer'+suffix))
             self.optimizer.load_state_dict(data['optimizer'])
-                
+
         if loaded:
             print('\tmodel loaded!\n')
         else:
             print('\tmodel loading failed!\n')
         return loaded
-            
+
     def saveWeights(self, model, path):
         if isinstance(model, nn.DataParallel):
             torch.save({
@@ -131,21 +131,21 @@ class BaseModel(nn.Module):
                 data = torch.load(path)
             else:
                 data = torch.load(path, map_location=lambda storage, loc: storage)
-                
-            
+
+
             new_dict = collections.OrderedDict()
             if isinstance(model, nn.DataParallel):
-                for k,v in data['model'].items():                    
+                for k,v in data['model'].items():
                     if k[:6] != 'module':
                         name = 'module.' + k
                         new_dict [name] = v
                 model.load_state_dict(new_dict)
             else:
-                for k,v in data['model'].items():                    
+                for k,v in data['model'].items():
                     if k[:6] == 'module':
                         name = k[7:]
                         new_dict [name] = v
-                model.load_state_dict(data['model'])
+                model.load_state_dict(data['model'], strict=False)
             return True
         else:
             return False

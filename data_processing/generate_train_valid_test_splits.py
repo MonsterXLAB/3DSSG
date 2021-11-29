@@ -7,7 +7,7 @@ This problem build up the scan and rescan list.
 """
 if __name__ == '__main__' and __package__ is None:
     from os import sys
-    sys.path.append('../')
+    sys.path.append('./')
 from pathlib import Path
 import os 
 import json

@@ -14,7 +14,7 @@ LABEL_FILE_NAME_RAW = 'labels.instances.annotated.v2.ply'
 LABEL_FILE_NAME = 'labels.instances.align.annotated.v2.ply'
 SEMSEG_FILE_NAME = 'semseg.v2.json'
 MTL_NAME = 'mesh.refined.mtl'
-OBJ_NAME = 'mesh.refined.obj'
+OBJ_NAME = 'mesh.refined.v2.obj'
 TEXTURE_NAME = 'mesh.refined_0.png'
 
 # ScanNet file names

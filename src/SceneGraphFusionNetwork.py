@@ -59,7 +59,7 @@ class SGFN():
             num_rel_class = len(self.dataset_eval.relationNames)
             dataset = self.dataset_eval
         except:
-            print('canno build eval dataset.')
+            print('cannot build eval dataset.')
             self.dataset_eval = None
             
         ''' Build Model '''
@@ -415,7 +415,6 @@ class SGFN():
                 ("Recall/val_rel_cls",rel_[2])]  
         self.log(logs,self.model.iteration)
         return cls_, rel_
-
         
     def eval(self, debug_mode=False):
         if self.dataset_eval is None:
